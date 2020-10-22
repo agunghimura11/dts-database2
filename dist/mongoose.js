@@ -39,9 +39,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Customer = void 0;
+exports.Transaction = exports.Account = exports.Customer = void 0;
 var mongoose_1 = __importDefault(require("mongoose"));
-//schema definition
+// customer schema definition
 var CustomerSchema = new mongoose_1.default.Schema({
     first_name: { type: String, required: true },
     last_name: { type: String, required: true },
@@ -53,6 +53,25 @@ var CustomerSchema = new mongoose_1.default.Schema({
     zip_code: { type: String, required: true },
     phone_number: { type: String, default: '808080808080' },
 });
+//account schema definition
+var AccountSchema = new mongoose_1.default.Schema({
+    customer_id: { type: String, required: true },
+    balance: { type: Number, required: true },
+    account_type: { type: String, required: true },
+});
+//transaction schema definition
+var TransactionSchema = new mongoose_1.default.Schema({
+    customer_id: { type: String, required: true },
+    date: { type: Date, default: Date.now },
+    type: { type: String, required: true },
+    acc_id: { type: String, required: true },
+    details: {
+        acc_from: { type: String, required: true },
+        acc_to: { type: String, required: true },
+        amount: { type: Number, required: true },
+    }
+});
+// CRUD customer
 var Customer = /** @class */ (function () {
     function Customer() {
         this.model = mongoose_1.default.model('customer', CustomerSchema);
@@ -156,4 +175,206 @@ var Customer = /** @class */ (function () {
     return Customer;
 }());
 exports.Customer = Customer;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9uZ29vc2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9zcmMvbW9uZ29vc2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsc0RBQStCO0FBZ0IvQixtQkFBbUI7QUFDbkIsSUFBTSxjQUFjLEdBQUcsSUFBSSxrQkFBUSxDQUFDLE1BQU0sQ0FBQztJQUN6QyxVQUFVLEVBQUUsRUFBQyxJQUFJLEVBQUMsTUFBTSxFQUFFLFFBQVEsRUFBRSxJQUFJLEVBQUM7SUFDMUMsU0FBUyxFQUFFLEVBQUMsSUFBSSxFQUFDLE1BQU0sRUFBRSxRQUFRLEVBQUUsSUFBSSxFQUFDO0lBQ3hDLEdBQUcsRUFBRSxFQUFDLElBQUksRUFBQyxNQUFNLEVBQUUsUUFBUSxFQUFFLElBQUksRUFBQztJQUNsQyxhQUFhLEVBQUUsRUFBQyxJQUFJLEVBQUMsTUFBTSxFQUFFLFFBQVEsRUFBRSxJQUFJLEVBQUM7SUFDNUMsTUFBTSxFQUFFLEVBQUMsSUFBSSxFQUFDLE1BQU0sRUFBRSxRQUFRLEVBQUUsSUFBSSxFQUFDO0lBQ3JDLElBQUksRUFBRSxFQUFDLElBQUksRUFBQyxNQUFNLEVBQUUsUUFBUSxFQUFFLElBQUksRUFBQztJQUNuQyxLQUFLLEVBQUUsRUFBQyxJQUFJLEVBQUMsTUFBTSxFQUFFLFFBQVEsRUFBRSxJQUFJLEVBQUM7SUFDcEMsUUFBUSxFQUFFLEVBQUMsSUFBSSxFQUFDLE1BQU0sRUFBRSxRQUFRLEVBQUUsSUFBSSxFQUFDO0lBQ3ZDLFlBQVksRUFBRSxFQUFDLElBQUksRUFBRSxNQUFNLEVBQUUsT0FBTyxFQUFFLGNBQWMsRUFBQztDQUNyRCxDQUFDLENBQUE7QUFFRjtJQUdFO1FBQ0UsSUFBSSxDQUFDLEtBQUssR0FBRyxrQkFBUSxDQUFDLEtBQUssQ0FBQyxVQUFVLEVBQUUsY0FBYyxDQUFDLENBQUE7SUFDekQsQ0FBQztJQUVLLHlCQUFNLEdBQVosVUFBYSxJQUFrQjs7Ozs7Ozt3QkFFWixxQkFBTSxJQUFJLENBQUMsS0FBSyxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsRUFBQTs7d0JBQXRDLE1BQU0sR0FBRyxTQUE2Qjt3QkFDNUMsT0FBTyxDQUFDLEdBQUcsQ0FBQyxrQkFBa0IsRUFBRSxNQUFNLENBQUMsQ0FBQTs7Ozt3QkFFdkMsTUFBTSxPQUFLLENBQUE7Ozs7O0tBRWQ7SUFFSyx5QkFBTSxHQUFaOzs7Ozs7O3dCQUlnQixxQkFBTSxJQUFJLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQyxFQUFFLENBQUMsRUFBQTs7d0JBQXJDLFNBQVMsR0FBRyxTQUF5QixDQUFBOzs7O3dCQUVyQyxNQUFNLE9BQUssQ0FBQTs0QkFHYixzQkFBTyxTQUFTLEVBQUE7Ozs7S0FDakI7SUFFSywwQkFBTyxHQUFiLFVBQWMsVUFBa0I7Ozs7Ozs7d0JBR2pCLHFCQUFNLElBQUksQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLFVBQVUsQ0FBQyxFQUFBOzt3QkFBaEQsUUFBUSxHQUFHLFNBQXFDLENBQUE7Ozs7d0JBRWhELE1BQU0sT0FBSyxDQUFBOzRCQUdiLHNCQUFPLFFBQVEsRUFBQTs7OztLQUNoQjtJQUVLLHlCQUFNLEdBQVosVUFBYSxVQUFrQixFQUFFLElBQTJCOzs7Ozs7O3dCQUV4RCxxQkFBTSxJQUFJLENBQUMsS0FBSyxDQUFDLGlCQUFpQixDQUFDLFVBQVUsRUFBRSxFQUFFLElBQUksRUFBRSxJQUFJLEVBQUUsQ0FBQyxFQUFBOzt3QkFBOUQsU0FBOEQsQ0FBQTs7Ozt3QkFFOUQsTUFBTSxPQUFLLENBQUE7Ozs7O0tBRWQ7SUFFSyx5QkFBTSxHQUFaLFVBQWEsVUFBa0I7Ozs7Ozs7d0JBRTNCLHFCQUFNLElBQUksQ0FBQyxLQUFLLENBQUMsaUJBQWlCLENBQUMsVUFBVSxDQUFDLEVBQUE7O3dCQUE5QyxTQUE4QyxDQUFBOzs7O3dCQUU5QyxNQUFNLE9BQUssQ0FBQTs7Ozs7S0FFZDtJQUNILGVBQUM7QUFBRCxDQUFDLEFBdERELElBc0RDO0FBdERZLDRCQUFRIn0=
+// account CRUD
+var Account = /** @class */ (function () {
+    function Account() {
+        this.model = mongoose_1.default.model('account', AccountSchema);
+    }
+    Account.prototype.create = function (data) {
+        return __awaiter(this, void 0, void 0, function () {
+            var result, error_6;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.model.create(data)];
+                    case 1:
+                        result = _a.sent();
+                        console.log('Insert result %j', result);
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_6 = _a.sent();
+                        throw error_6;
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Account.prototype.getAll = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var accounts, error_7;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.model.find({})];
+                    case 1:
+                        accounts = _a.sent();
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_7 = _a.sent();
+                        throw error_7;
+                    case 3: return [2 /*return*/, accounts];
+                }
+            });
+        });
+    };
+    Account.prototype.getByID = function (accountID) {
+        return __awaiter(this, void 0, void 0, function () {
+            var account, error_8;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.model.findById(accountID)];
+                    case 1:
+                        account = _a.sent();
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_8 = _a.sent();
+                        throw error_8;
+                    case 3: return [2 /*return*/, account];
+                }
+            });
+        });
+    };
+    Account.prototype.update = function (accountID, data) {
+        return __awaiter(this, void 0, void 0, function () {
+            var error_9;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.model.findByIdAndUpdate(accountID, { $set: data })];
+                    case 1:
+                        _a.sent();
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_9 = _a.sent();
+                        throw error_9;
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Account.prototype.delete = function (accountID) {
+        return __awaiter(this, void 0, void 0, function () {
+            var error_10;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.model.findByIdAndDelete(accountID)];
+                    case 1:
+                        _a.sent();
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_10 = _a.sent();
+                        throw error_10;
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    return Account;
+}());
+exports.Account = Account;
+// transaction CRUD
+var Transaction = /** @class */ (function () {
+    function Transaction() {
+        this.model = mongoose_1.default.model('transaction', TransactionSchema);
+    }
+    Transaction.prototype.create = function (data) {
+        return __awaiter(this, void 0, void 0, function () {
+            var result;
+            return __generator(this, function (_a) {
+                try {
+                    result = mongoose_1.default.model('transaction', TransactionSchema);
+                }
+                catch (error) {
+                    throw error;
+                }
+                return [2 /*return*/];
+            });
+        });
+    };
+    Transaction.prototype.getAll = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var transc, error_11;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.model.find({})];
+                    case 1:
+                        transc = _a.sent();
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_11 = _a.sent();
+                        throw error_11;
+                    case 3: return [2 /*return*/, transc];
+                }
+            });
+        });
+    };
+    Transaction.prototype.getByID = function (transcID) {
+        return __awaiter(this, void 0, void 0, function () {
+            var transc, error_12;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.model.findById(transcID)];
+                    case 1:
+                        transc = _a.sent();
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_12 = _a.sent();
+                        throw error_12;
+                    case 3: return [2 /*return*/, transc];
+                }
+            });
+        });
+    };
+    Transaction.prototype.update = function (transcID, data) {
+        return __awaiter(this, void 0, void 0, function () {
+            var error_13;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.model.findByIdAndUpdate(transcID, { $set: data })];
+                    case 1:
+                        _a.sent();
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_13 = _a.sent();
+                        throw error_13;
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Transaction.prototype.delete = function (transcID) {
+        return __awaiter(this, void 0, void 0, function () {
+            var error_14;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.model.findByIdAndDelete(transcID)];
+                    case 1:
+                        _a.sent();
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_14 = _a.sent();
+                        throw error_14;
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    return Transaction;
+}());
+exports.Transaction = Transaction;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9uZ29vc2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9zcmMvbW9uZ29vc2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQ0Esc0RBQTBDO0FBb0MxQyw2QkFBNkI7QUFDN0IsSUFBTSxjQUFjLEdBQUcsSUFBSSxrQkFBUSxDQUFDLE1BQU0sQ0FBQztJQUN6QyxVQUFVLEVBQUUsRUFBQyxJQUFJLEVBQUMsTUFBTSxFQUFFLFFBQVEsRUFBRSxJQUFJLEVBQUM7SUFDMUMsU0FBUyxFQUFFLEVBQUMsSUFBSSxFQUFDLE1BQU0sRUFBRSxRQUFRLEVBQUUsSUFBSSxFQUFDO0lBQ3hDLEdBQUcsRUFBRSxFQUFDLElBQUksRUFBQyxNQUFNLEVBQUUsUUFBUSxFQUFFLElBQUksRUFBQztJQUNsQyxhQUFhLEVBQUUsRUFBQyxJQUFJLEVBQUMsTUFBTSxFQUFFLFFBQVEsRUFBRSxJQUFJLEVBQUM7SUFDNUMsTUFBTSxFQUFFLEVBQUMsSUFBSSxFQUFDLE1BQU0sRUFBRSxRQUFRLEVBQUUsSUFBSSxFQUFDO0lBQ3JDLElBQUksRUFBRSxFQUFDLElBQUksRUFBQyxNQUFNLEVBQUUsUUFBUSxFQUFFLElBQUksRUFBQztJQUNuQyxLQUFLLEVBQUUsRUFBQyxJQUFJLEVBQUMsTUFBTSxFQUFFLFFBQVEsRUFBRSxJQUFJLEVBQUM7SUFDcEMsUUFBUSxFQUFFLEVBQUMsSUFBSSxFQUFDLE1BQU0sRUFBRSxRQUFRLEVBQUUsSUFBSSxFQUFDO0lBQ3ZDLFlBQVksRUFBRSxFQUFDLElBQUksRUFBRSxNQUFNLEVBQUUsT0FBTyxFQUFFLGNBQWMsRUFBQztDQUNyRCxDQUFDLENBQUE7QUFFRiwyQkFBMkI7QUFDM0IsSUFBTSxhQUFhLEdBQUcsSUFBSSxrQkFBUSxDQUFDLE1BQU0sQ0FBQztJQUN4QyxXQUFXLEVBQUcsRUFBQyxJQUFJLEVBQUMsTUFBTSxFQUFFLFFBQVEsRUFBRSxJQUFJ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
