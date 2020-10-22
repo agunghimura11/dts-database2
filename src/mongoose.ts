@@ -24,7 +24,7 @@ const CustomerSchema = new mongoose.Schema({
 	city: String,
 	state: String,
 	zip_code: String,
-	phone_number: String,
+	phone_number: {type: String, default: '808080808080'},
 })
 
 export class Customer {
@@ -34,20 +34,44 @@ export class Customer {
     this.model = mongoose.model('customer', CustomerSchema)
   }
 
-  async create() {
-
+  async create(data: CustomerType) {
+    try{
+      const result = await this.model.create(data)
+      console.log('Insert result %j', result)
+    } catch(error){
+      throw error
+    }
   }
 
-  async getAll() {
+  async getAll() {  
+    let customers: CustomerType[]
 
+    try{
+      customers = await this.model.find({})
+    }catch(error){
+      throw error
+    }
+
+    return customers
   }
 
-  async getByID() {
-    
+  async getByID(customerID: string) {
+    let customer: CustomerType | null
+    try {
+      customer = await this.model.findById(customerID)
+    }catch(error){
+      throw error
+    }
+
+    return customer
   }
 
-  async update() {
-
+  async update(customerID: string, data: Partial<CustomerType>) {
+    try{
+      await this.model.findByIdAndUpdate(customerID, { $set: data })
+    }catch(error){
+      throw error
+    }
   }
 
   async delete() {

@@ -51,37 +51,86 @@ var CustomerSchema = new mongoose_1.default.Schema({
     city: String,
     state: String,
     zip_code: String,
-    phone_number: String,
+    phone_number: { type: String, default: '808080808080' },
 });
 var Customer = /** @class */ (function () {
     function Customer() {
         this.model = mongoose_1.default.model('customer', CustomerSchema);
     }
-    Customer.prototype.create = function () {
+    Customer.prototype.create = function (data) {
         return __awaiter(this, void 0, void 0, function () {
+            var result, error_1;
             return __generator(this, function (_a) {
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.model.create(data)];
+                    case 1:
+                        result = _a.sent();
+                        console.log('Insert result %j', result);
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_1 = _a.sent();
+                        throw error_1;
+                    case 3: return [2 /*return*/];
+                }
             });
         });
     };
     Customer.prototype.getAll = function () {
         return __awaiter(this, void 0, void 0, function () {
+            var customers, error_2;
             return __generator(this, function (_a) {
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.model.find({})];
+                    case 1:
+                        customers = _a.sent();
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_2 = _a.sent();
+                        throw error_2;
+                    case 3: return [2 /*return*/, customers];
+                }
             });
         });
     };
-    Customer.prototype.getByID = function () {
+    Customer.prototype.getByID = function (customerID) {
         return __awaiter(this, void 0, void 0, function () {
+            var customer, error_3;
             return __generator(this, function (_a) {
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.model.findById(customerID)];
+                    case 1:
+                        customer = _a.sent();
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_3 = _a.sent();
+                        throw error_3;
+                    case 3: return [2 /*return*/, customer];
+                }
             });
         });
     };
-    Customer.prototype.update = function () {
+    Customer.prototype.update = function (customerID, data) {
         return __awaiter(this, void 0, void 0, function () {
+            var error_4;
             return __generator(this, function (_a) {
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.model.findByIdAndUpdate(customerID, { $set: data })];
+                    case 1:
+                        _a.sent();
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_4 = _a.sent();
+                        throw error_4;
+                    case 3: return [2 /*return*/];
+                }
             });
         });
     };
@@ -95,4 +144,4 @@ var Customer = /** @class */ (function () {
     return Customer;
 }());
 exports.Customer = Customer;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9uZ29vc2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9zcmMvbW9uZ29vc2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsc0RBQStCO0FBZ0IvQixtQkFBbUI7QUFDbkIsSUFBTSxjQUFjLEdBQUcsSUFBSSxrQkFBUSxDQUFDLE1BQU0sQ0FBQztJQUN6QyxVQUFVLEVBQUUsTUFBTTtJQUNuQixTQUFTLEVBQUUsTUFBTTtJQUNqQixHQUFHLEVBQUUsTUFBTTtJQUNYLGFBQWEsRUFBRSxNQUFNO0lBQ3JCLE1BQU0sRUFBRSxNQUFNO0lBQ2QsSUFBSSxFQUFFLE1BQU07SUFDWixLQUFLLEVBQUUsTUFBTTtJQUNiLFFBQVEsRUFBRSxNQUFNO0lBQ2hCLFlBQVksRUFBRSxNQUFNO0NBQ3BCLENBQUMsQ0FBQTtBQUVGO0lBR0U7UUFDRSxJQUFJLENBQUMsS0FBSyxHQUFHLGtCQUFRLENBQUMsS0FBSyxDQUFDLFVBQVUsRUFBRSxjQUFjLENBQUMsQ0FBQTtJQUN6RCxDQUFDO0lBRUsseUJBQU0sR0FBWjs7Ozs7O0tBRUM7SUFFSyx5QkFBTSxHQUFaOzs7Ozs7S0FFQztJQUVLLDBCQUFPLEdBQWI7Ozs7OztLQUVDO0lBRUsseUJBQU0sR0FBWjs7Ozs7O0tBRUM7SUFFSyx5QkFBTSxHQUFaOzs7Ozs7S0FFQztJQUNILGVBQUM7QUFBRCxDQUFDLEFBMUJELElBMEJDO0FBMUJZLDRCQUFRIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9uZ29vc2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9zcmMvbW9uZ29vc2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsc0RBQStCO0FBZ0IvQixtQkFBbUI7QUFDbkIsSUFBTSxjQUFjLEdBQUcsSUFBSSxrQkFBUSxDQUFDLE1BQU0sQ0FBQztJQUN6QyxVQUFVLEVBQUUsTUFBTTtJQUNuQixTQUFTLEVBQUUsTUFBTTtJQUNqQixHQUFHLEVBQUUsTUFBTTtJQUNYLGFBQWEsRUFBRSxNQUFNO0lBQ3JCLE1BQU0sRUFBRSxNQUFNO0lBQ2QsSUFBSSxFQUFFLE1BQU07SUFDWixLQUFLLEVBQUUsTUFBTTtJQUNiLFFBQVEsRUFBRSxNQUFNO0lBQ2hCLFlBQVksRUFBRSxFQUFDLElBQUksRUFBRSxNQUFNLEVBQUUsT0FBTyxFQUFFLGNBQWMsRUFBQztDQUNyRCxDQUFDLENBQUE7QUFFRjtJQUdFO1FBQ0UsSUFBSSxDQUFDLEtBQUssR0FBRyxrQkFBUSxDQUFDLEtBQUssQ0FBQyxVQUFVLEVBQUUsY0FBYyxDQUFDLENBQUE7SUFDekQsQ0FBQztJQUVLLHlCQUFNLEdBQVosVUFBYSxJQUFrQjs7Ozs7Ozt3QkFFWixxQkFBTSxJQUFJLENBQUMsS0FBSyxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsRUFBQTs7d0JBQXRDLE1BQU0sR0FBRyxTQUE2Qjt3QkFDNUMsT0FBTyxDQUFDLEdBQUcsQ0FBQyxrQkFBa0IsRUFBRSxNQUFNLENBQUMsQ0FBQTs7Ozt3QkFFdkMsTUFBTSxPQUFLLENBQUE7Ozs7O0tBRWQ7SUFFSyx5QkFBTSxHQUFaOzs7Ozs7O3dCQUlnQixxQkFBTSxJQUFJLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQyxFQUFFLENBQUMsRUFBQTs7d0JBQXJDLFNBQVMsR0FBRyxTQUF5QixDQUFBOzs7O3dCQUVyQyxNQUFNLE9BQUssQ0FBQTs0QkFHYixzQkFBTyxTQUFTLEVBQUE7Ozs7S0FDakI7SUFFSywwQkFBTyxHQUFiLFVBQWMsVUFBa0I7Ozs7Ozs7d0JBR2pCLHFCQUFNLElBQUksQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLFVBQVUsQ0FBQyxFQUFBOzt3QkFBaEQsUUFBUSxHQUFHLFNBQXFDLENBQUE7Ozs7d0JBRWhELE1BQU0sT0FBSyxDQUFBOzRCQUdiLHNCQUFPLFFBQVEsRUFBQTs7OztLQUNoQjtJQUVLLHlCQUFNLEdBQVosVUFBYSxVQUFrQixFQUFFLElBQTJCOzs7Ozs7O3dCQUV4RCxxQkFBTSxJQUFJLENBQUMsS0FBSyxDQUFDLGlCQUFpQixDQUFDLFVBQVUsRUFBRSxFQUFFLElBQUksRUFBRSxJQUFJLEVBQUUsQ0FBQyxFQUFBOzt3QkFBOUQsU0FBOEQsQ0FBQTs7Ozt3QkFFOUQsTUFBTSxPQUFLLENBQUE7Ozs7O0tBRWQ7SUFFSyx5QkFBTSxHQUFaOzs7Ozs7S0FFQztJQUNILGVBQUM7QUFBRCxDQUFDLEFBbERELElBa0RDO0FBbERZLDRCQUFRIn0=
