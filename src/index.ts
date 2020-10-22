@@ -30,8 +30,15 @@ async function initApp() {
     res.send({ success: true })
   })
 
-  app.get('/customer', function(req, res, next) {
+  app.get('/customer', async function(req, res, next) {
+    let customers: CustomerType[]
+    try {
+      customers = await customerModel.getAll()
+    }catch(error){
+      return next(error)
+    }
 
+    return res.send(customers)
   })
 
   app.get('/cutomer/:id', function(req, res, next) {
