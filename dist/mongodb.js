@@ -35,8 +35,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Customer = void 0;
+var mongodb_1 = __importDefault(require("mongodb"));
 var Customer = /** @class */ (function () {
     function Customer(db) {
         this.collection = db.collection('customer');
@@ -80,10 +84,22 @@ var Customer = /** @class */ (function () {
             });
         });
     };
-    Customer.prototype.getByID = function () {
+    Customer.prototype.getByID = function (customerID) {
         return __awaiter(this, void 0, void 0, function () {
+            var customer, error_3;
             return __generator(this, function (_a) {
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.collection.findOne({ _id: new mongodb_1.default.ObjectID(customerID) })];
+                    case 1:
+                        customer = _a.sent();
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_3 = _a.sent();
+                        throw error_3;
+                    case 3: return [2 /*return*/, customer];
+                }
             });
         });
     };
@@ -104,4 +120,4 @@ var Customer = /** @class */ (function () {
     return Customer;
 }());
 exports.Customer = Customer;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9uZ29kYi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uL3NyYy9tb25nb2RiLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQWVBO0lBR0Usa0JBQVksRUFBYztRQUN4QixJQUFJLENBQUMsVUFBVSxHQUFHLEVBQUUsQ0FBQyxVQUFVLENBQUMsVUFBVSxDQUFDLENBQUE7SUFDN0MsQ0FBQztJQUVLLHlCQUFNLEdBQVosVUFBYSxJQUFrQjs7Ozs7Ozt3QkFFWixxQkFBTSxJQUFJLENBQUMsVUFBVSxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsRUFBQTs7d0JBQTlDLE1BQU0sR0FBRyxTQUFxQzt3QkFDcEQsT0FBTyxDQUFDLEdBQUcsQ0FBQyxrQkFBa0IsRUFBRSxNQUFNLENBQUMsQ0FBQTs7Ozt3QkFFdkMsTUFBTSxPQUFLLENBQUE7Ozs7O0tBRWQ7SUFFSyx5QkFBTSxHQUFaOzs7Ozs7O3dCQUdnQixxQkFBTSxJQUFJLENBQUMsVUFBVSxDQUFDLElBQUksQ0FBQyxFQUFFLENBQUMsQ0FBQyxPQUFPLEVBQUUsRUFBQTs7d0JBQXBELFNBQVMsR0FBRyxTQUF3QyxDQUFBOzs7O3dCQUVwRCxNQUFNLE9BQUssQ0FBQTs0QkFHYixzQkFBTyxTQUFTLEVBQUE7Ozs7S0FDakI7SUFFSywwQkFBTyxHQUFiOzs7Ozs7S0FFQztJQUVLLHlCQUFNLEdBQVo7Ozs7OztLQUVDO0lBR0sseUJBQU0sR0FBWjs7Ozs7O0tBRUM7SUFDSCxlQUFDO0FBQUQsQ0FBQyxBQXZDRCxJQXVDQztBQXZDWSw0QkFBUSJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9uZ29kYi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uL3NyYy9tb25nb2RiLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUFBLG9EQUE2QjtBQWU3QjtJQUdFLGtCQUFZLEVBQWM7UUFDeEIsSUFBSSxDQUFDLFVBQVUsR0FBRyxFQUFFLENBQUMsVUFBVSxDQUFDLFVBQVUsQ0FBQyxDQUFBO0lBQzdDLENBQUM7SUFFSyx5QkFBTSxHQUFaLFVBQWEsSUFBa0I7Ozs7Ozs7d0JBRVoscUJBQU0sSUFBSSxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLEVBQUE7O3dCQUE5QyxNQUFNLEdBQUcsU0FBcUM7d0JBQ3BELE9BQU8sQ0FBQyxHQUFHLENBQUMsa0JBQWtCLEVBQUUsTUFBTSxDQUFDLENBQUE7Ozs7d0JBRXZDLE1BQU0sT0FBSyxDQUFBOzs7OztLQUVkO0lBRUsseUJBQU0sR0FBWjs7Ozs7Ozt3QkFHZ0IscUJBQU0sSUFBSSxDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUMsRUFBRSxDQUFDLENBQUMsT0FBTyxFQUFFLEVBQUE7O3dCQUFwRCxTQUFTLEdBQUcsU0FBd0MsQ0FBQTs7Ozt3QkFFcEQsTUFBTSxPQUFLLENBQUE7NEJBR2Isc0JBQU8sU0FBUyxFQUFBOzs7O0tBQ2pCO0lBRUssMEJBQU8sR0FBYixVQUFjLFVBQWtCOzs7Ozs7O3dCQUdqQixxQkFBTSxJQUFJLENBQUMsVUFBVSxDQUFDLE9BQU8sQ0FBQyxFQUFFLEdBQUcsRUFBRSxJQUFJLGlCQUFPLENBQUMsUUFBUSxDQUFDLFVBQVUsQ0FBQyxFQUFFLENBQUMsRUFBQTs7d0JBQW5GLFFBQVEsR0FBRyxTQUF3RSxDQUFBOzs7O3dCQUVuRixNQUFNLE9BQUssQ0FBQTs0QkFHYixzQkFBTyxRQUFRLEVBQUE7Ozs7S0FDaEI7SUFFSyx5QkFBTSxHQUFaOzs7Ozs7S0FFQztJQUdLLHlCQUFNLEdBQVo7Ozs7OztLQUVDO0lBQ0gsZUFBQztBQUFELENBQUMsQUE5Q0QsSUE4Q0M7QUE5Q1ksNEJBQVEifQ==

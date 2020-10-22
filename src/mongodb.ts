@@ -40,8 +40,15 @@ export class Customer {
     return customers
   }
 
-  async getByID() {
-    
+  async getByID(customerID: string) {
+    let customer: CustomerType | null
+    try {
+      customer = await this.collection.findOne({ _id: new mongodb.ObjectID(customerID) })
+    } catch (error){
+      throw error
+    }
+
+    return customer
   }
 
   async update() {
