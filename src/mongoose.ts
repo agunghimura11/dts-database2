@@ -1,5 +1,5 @@
-import { Timestamp } from 'mongodb'
-import mongoose, { mongo } from 'mongoose'
+
+import mongoose, { Schema } from 'mongoose'
 
 export type CustomerType = {
   first_name: string
@@ -14,16 +14,16 @@ export type CustomerType = {
 }
 
 export type AccountType = {
-  customer_id : string
+  customer_id : Schema.Types.ObjectId
   balance : number
   account_type : string
 }
 
 export type TransactionType = {
-  customer_id : string
+  customer_id : Schema.Types.ObjectId
   date : Date
+  update_date : Date
   type : string
-  acc_id : number
   details : {
     acc_from: string
     acc_to: string
@@ -58,9 +58,9 @@ const AccountSchema = new mongoose.Schema({
 //transaction schema definition
 const TransactionSchema = new mongoose.Schema({
   customer_id : {type:String, required: true},
-  date : { type : Date, default: Date.now },
+  transc_date : { type : Date, default: Date.now },
+  update_date : { type : Date, default: Date.now },
   type : {type:String, required: true},
-  acc_id : {type:String, required: true},
   details : {
     acc_from: {type:String, required: true},
     acc_to: {type:String, required: true},
@@ -109,6 +109,7 @@ export class Customer {
   }
 
   async update(customerID: string, data: Partial<CustomerType>) {
+   
     try{
       await this.model.findByIdAndUpdate(customerID, { $set: data })
     }catch(error){
@@ -117,6 +118,7 @@ export class Customer {
   }
 
   async delete(customerID: string) {
+    
     try{
       await this.model.findByIdAndDelete(customerID)
     }catch (error){
@@ -133,15 +135,16 @@ export class Account {
     this.model = mongoose.model('account', AccountSchema)
   }
 
+  // create accout
   async create(data: AccountType){
     try{
       const result = await this.model.create(data)
-      console.log('Insert result %j', result)
     } catch(error){
       throw error
     }
   }
 
+  //get all account
   async getAll(){
     let accounts: AccountType[]
 
@@ -154,6 +157,7 @@ export class Account {
     return accounts
   }
 
+  // get account by id
   async getByID(accountID: string){
     let account: AccountType | null
     try {
@@ -165,6 +169,7 @@ export class Account {
     return account
   }
 
+  // update account
   async update(accountID: string, data: Partial<AccountDocument> ) {
     try{
       await this.model.findByIdAndUpdate(accountID, { $set: data })
@@ -173,6 +178,7 @@ export class Account {
     }
   }
 
+  // delete account
   async delete(accountID: string){
     try{
       await this.model.findByIdAndDelete(accountID)
@@ -183,7 +189,7 @@ export class Account {
 
 }
 
-// transaction CRUD
+// Transaction CRUD
 export class Transaction {
   private model: mongoose.Model<TransactionDocument>
 
@@ -191,14 +197,16 @@ export class Transaction {
     this.model = mongoose.model('transaction', TransactionSchema)
   }
 
+  // get transaction
   async create(data: TransactionType){
     try{
-      const result = mongoose.model('transaction', TransactionSchema)
+      const result = await this.model.create(data)
     } catch(error){
       throw error
     }
   }
 
+  // get all transaction
   async getAll(){
     let transc: TransactionType[]
 
@@ -211,6 +219,7 @@ export class Transaction {
     return transc
   }
 
+  // get transaction by id
   async getByID(transcID: string){
     let transc: TransactionType | null
     try{
@@ -222,15 +231,19 @@ export class Transaction {
     return transc
   }
 
+  // update transaction
   async update(transcID: string, data: Partial<TransactionDocument>){
     try{
+      data.update_date = new Date //save date update
       await this.model.findByIdAndUpdate(transcID, { $set: data })
     }catch(error){
       throw error
     }
   }
 
+  // delete transaction
   async delete(transcID: string){
+   
     try{
       await this.model.findByIdAndDelete(transcID)
     }catch(error){
@@ -239,3 +252,5 @@ export class Transaction {
   }
 
 }
+
+// arisudana
