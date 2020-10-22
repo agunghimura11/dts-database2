@@ -51,7 +51,7 @@ var mongoose_1 = __importDefault(require("mongoose"));
 var mongoose_2 = require("./mongoose");
 function initApp() {
     return __awaiter(this, void 0, void 0, function () {
-        var app, customerModel;
+        var app, customerModel, accountModel, transactionModel;
         return __generator(this, function (_a) {
             app = express_1.default();
             // //init db
@@ -61,7 +61,10 @@ function initApp() {
             // init mongose db
             mongoose_1.default.connect("" + process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
             customerModel = new mongoose_2.Customer();
+            accountModel = new mongoose_2.Account();
+            transactionModel = new mongoose_2.Transaction();
             app.use(body_parser_1.default.json());
+            //Customer
             app.post('/customer', function (req, res, next) {
                 return __awaiter(this, void 0, void 0, function () {
                     var error_1;
@@ -102,7 +105,7 @@ function initApp() {
                     });
                 });
             });
-            app.get('/cutomer/:id', function (req, res, next) {
+            app.get('/customer/:id', function (req, res, next) {
                 return __awaiter(this, void 0, void 0, function () {
                     var customer, error_3;
                     return __generator(this, function (_a) {
@@ -163,6 +166,144 @@ function initApp() {
                     });
                 });
             });
+            // Account
+            app.post('/account', function (req, res, next) {
+                return __awaiter(this, void 0, void 0, function () {
+                    var error_6;
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                _a.trys.push([0, 2, , 3]);
+                                return [4 /*yield*/, accountModel.create(req.body)];
+                            case 1:
+                                _a.sent();
+                                return [3 /*break*/, 3];
+                            case 2:
+                                error_6 = _a.sent();
+                                return [2 /*return*/, next(error_6)];
+                            case 3:
+                                res.send({ success: true });
+                                return [2 /*return*/];
+                        }
+                    });
+                });
+            });
+            app.get('/account', function (req, res, next) {
+                return __awaiter(this, void 0, void 0, function () {
+                    var accounts, error_7;
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                _a.trys.push([0, 2, , 3]);
+                                return [4 /*yield*/, accountModel.getAll()];
+                            case 1:
+                                accounts = _a.sent();
+                                return [3 /*break*/, 3];
+                            case 2:
+                                error_7 = _a.sent();
+                                return [2 /*return*/, next(error_7)];
+                            case 3: return [2 /*return*/, res.send(accounts)];
+                        }
+                    });
+                });
+            });
+            app.get('/account/:id', function (req, res, next) {
+                return __awaiter(this, void 0, void 0, function () {
+                    var account, error_8;
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                _a.trys.push([0, 2, , 3]);
+                                return [4 /*yield*/, accountModel.getByID(req.params.id)];
+                            case 1:
+                                account = _a.sent();
+                                return [3 /*break*/, 3];
+                            case 2:
+                                error_8 = _a.sent();
+                                return [2 /*return*/, next(error_8)];
+                            case 3: return [2 /*return*/, res.send(account)];
+                        }
+                    });
+                });
+            });
+            app.put('/account', function (req, res, next) {
+                return __awaiter(this, void 0, void 0, function () {
+                    var error_9;
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                _a.trys.push([0, 2, , 3]);
+                                return [4 /*yield*/, accountModel.update(req.params.id, req.body)];
+                            case 1:
+                                _a.sent();
+                                return [3 /*break*/, 3];
+                            case 2:
+                                error_9 = _a.sent();
+                                return [2 /*return*/, next(error_9)];
+                            case 3:
+                                res.send({ success: true });
+                                return [2 /*return*/];
+                        }
+                    });
+                });
+            });
+            app.delete('/account', function (req, res, next) {
+                return __awaiter(this, void 0, void 0, function () {
+                    var error_10;
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                _a.trys.push([0, 2, , 3]);
+                                return [4 /*yield*/, accountModel.delete(req.params.id)];
+                            case 1:
+                                _a.sent();
+                                return [3 /*break*/, 3];
+                            case 2:
+                                error_10 = _a.sent();
+                                return [2 /*return*/, next(error_10)];
+                            case 3:
+                                res.send({ success: true });
+                                return [2 /*return*/];
+                        }
+                    });
+                });
+            });
+            // Transaction
+            app.post('/trans', function (req, res, next) {
+                return __awaiter(this, void 0, void 0, function () {
+                    return __generator(this, function (_a) {
+                        return [2 /*return*/];
+                    });
+                });
+            });
+            app.get('/trans', function (req, res, next) {
+                return __awaiter(this, void 0, void 0, function () {
+                    return __generator(this, function (_a) {
+                        return [2 /*return*/];
+                    });
+                });
+            });
+            app.get('/trans/:id', function (req, res, next) {
+                return __awaiter(this, void 0, void 0, function () {
+                    return __generator(this, function (_a) {
+                        return [2 /*return*/];
+                    });
+                });
+            });
+            app.put('/trans/:id', function (req, res, next) {
+                return __awaiter(this, void 0, void 0, function () {
+                    return __generator(this, function (_a) {
+                        return [2 /*return*/];
+                    });
+                });
+            });
+            app.delete('/trans/:id', function (req, res, next) {
+                return __awaiter(this, void 0, void 0, function () {
+                    return __generator(this, function (_a) {
+                        return [2 /*return*/];
+                    });
+                });
+            });
             app.use(function (err, req, res, next) {
                 res.status(500).send({
                     success: false,
@@ -177,4 +318,4 @@ function initApp() {
     });
 }
 initApp();
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9zcmMvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxpREFBaUQ7QUFDakQsdUNBQW9DO0FBRXBDLGtEQUEyQjtBQUMzQixnQkFBTSxDQUFDLE1BQU0sRUFBRSxDQUFBO0FBRWYsb0RBQTZCO0FBQzdCLDREQUFvQztBQUVwQyxnQ0FBZ0M7QUFDaEMsc0RBQStCO0FBQy9CLG1EQUFtRDtBQUNuRCx1Q0FBaUQ7QUFFakQsU0FBZSxPQUFPOzs7O1lBQ2QsR0FBRyxHQUFHLGlCQUFPLEVBQUUsQ0FBQTtZQUVyQixZQUFZO1lBQ1osNkhBQTZIO1lBQzdILDBEQUEwRDtZQUMxRCx5Q0FBeUM7WUFFekMsa0JBQWtCO1lBQ2xCLGtCQUFRLENBQUMsT0FBTyxDQUFDLEtBQUcsT0FBTyxDQUFDLEdBQUcsQ0FBQyxXQUFhLEVBQUUsRUFBRSxlQUFlLEVBQUMsSUFBSSxFQUFFLGtCQUFrQixFQUFFLElBQUksRUFBRSxDQUFDLENBQUE7WUFDNUYsYUFBYSxHQUFHLElBQUksbUJBQVEsRUFBRSxDQUFBO1lBRXBDLEdBQUcsQ0FBQyxHQUFHLENBQUMscUJBQVUsQ0FBQyxJQUFJLEVBQUUsQ0FBQyxDQUFBO1lBRTFCLEdBQUcsQ0FBQyxJQUFJLENBQUMsV0FBVyxFQUFFLFVBQWUsR0FBRyxFQUFFLEdBQUcsRUFBRSxJQUFJOzs7Ozs7O2dDQUUvQyxxQkFBTSxhQUFhLENBQUMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxJQUFJLENBQUMsRUFBQTs7Z0NBQXBDLFNBQW9DLENBQUE7Ozs7Z0NBRXBDLHNCQUFPLElBQUksQ0FBQyxPQUFLLENBQUMsRUFBQTs7Z0NBR3BCLEdBQUcsQ0FBQyxJQUFJLENBQUMsRUFBRSxPQUFPLEVBQUUsSUFBSSxFQUFFLENBQUMsQ0FBQTs7Ozs7YUFDNUIsQ0FBQyxDQUFBO1lBRUYsR0FBRyxDQUFD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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9zcmMvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxpREFBaUQ7QUFDakQsdUNBQW9DO0FBRXBDLGtEQUEyQjtBQUMzQixnQkFBTSxDQUFDLE1BQU0sRUFBRSxDQUFBO0FBRWYsb0RBQTZCO0FBQzdCLDREQUFvQztBQUVwQyxnQ0FBZ0M7QUFDaEMsc0RBQStCO0FBQy9CLG1EQUFtRDtBQUNuRCx1Q0FBcUc7QUFFckcsU0FBZSxPQUFPOzs7O1lBQ2QsR0FBRyxHQUFHLGlCQUFPLEVBQUUsQ0FBQTtZQUVyQixZQUFZO1lBQ1osNkhBQTZIO1lBQzdILDBEQUEwRDtZQUMxRCx5Q0FBeUM7WUFFekMsa0JBQWtCO1lBQ2xCLGtCQUFRLENBQUMsT0FBTyxDQUFDLEtBQUcsT0FBTyxDQUFDLEdBQUcsQ0FBQyxXQUFhLEVBQUUsRUFBRSxlQUFlLEVBQUMsSUFBSSxFQUFFLGtCQUFrQixFQUFFLElBQUksRUFBRSxDQUFDLENBQUE7WUFDNUYsYUFBYSxHQUFHLElBQUksbUJBQVEsRUFBRSxDQUFBO1lBQzlCLFlBQVksR0FBRyxJQUFJLGtCQUFPLEVBQUUsQ0FBQTtZQUM1QixnQkFBZ0IsR0FBRyxJQUFJLHNCQUFXLEVBQUUsQ0FBQTtZQUUxQyxHQUFHLENBQUMsR0FBRyxDQUFDLHFCQUFVLENBQUMsSUFBSSxFQUFFLENBQUMsQ0FBQTtZQUcxQixVQUFVO1lBQ1YsR0FBRyxDQUFDLElBQUksQ0FBQyxXQUFXLEVBQUUsVUFBZSxHQUFHLEVBQUUsR0FBRyxFQUFFLElBQUk7Ozs7Ozs7Z0NBRS9DLHFCQUFNLGFBQWEsQ0FBQyxNQUFNLENBQUMsR0FBRyxDQUFDLElBQUksQ0FBQyxFQUFBOztnQ0FBcEMsU0FBb0MsQ0FBQTs7OztnQ0FFcEMsc0JBQU8sSUFBSSxDQUFDLE9BQUssQ0FBQyxFQUFBOztnQ0FHcEIsR0FB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
