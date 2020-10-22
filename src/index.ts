@@ -7,17 +7,23 @@ dotenv.config()
 import express from 'express'
 import bodyParser from 'body-parser'
 
-import mongodb from 'mongodb'
-import {Customer, CustomerType} from './mongodb'
+// import mongodb from 'mongodb'
+import mongoose from 'mongoose'
+// import {Customer, CustomerType} from './mongodb'
+import {Customer, CustomerType} from './mongoose'
 
 async function initApp() {
   const app = express()
 
-  //init db
-  const connection = await mongodb.connect(`${process.env.MONGODB_URI}`, { useNewUrlParser:true, useUnifiedTopology: true })
-  const db = connection.db(`${process.env.MONGODB_NAME}`)
-  const customerModel = new Customer(db)
+  // //init db
+  // const connection = await mongodb.connect(`${process.env.MONGODB_URI}`, { useNewUrlParser:true, useUnifiedTopology: true })
+  // const db = connection.db(`${process.env.MONGODB_NAME}`)
+  // const customerModel = new Customer(db)
 
+  // init mongose db
+  mongoose.connect(`${process.env.MONGODB_URI}`, { useNewUrlParser:true, useUnifiedTopology: true })
+  const customerModel = new Customer()
+  
   app.use(bodyParser.json())
 
   app.post('/customer', async function(req, res, next) {

@@ -45,135 +45,136 @@ var dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 var express_1 = __importDefault(require("express"));
 var body_parser_1 = __importDefault(require("body-parser"));
-var mongodb_1 = __importDefault(require("mongodb"));
-var mongodb_2 = require("./mongodb");
+// import mongodb from 'mongodb'
+var mongoose_1 = __importDefault(require("mongoose"));
+// import {Customer, CustomerType} from './mongodb'
+var mongoose_2 = require("./mongoose");
 function initApp() {
     return __awaiter(this, void 0, void 0, function () {
-        var app, connection, db, customerModel;
+        var app, customerModel;
         return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    app = express_1.default();
-                    return [4 /*yield*/, mongodb_1.default.connect("" + process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })];
-                case 1:
-                    connection = _a.sent();
-                    db = connection.db("" + process.env.MONGODB_NAME);
-                    customerModel = new mongodb_2.Customer(db);
-                    app.use(body_parser_1.default.json());
-                    app.post('/customer', function (req, res, next) {
-                        return __awaiter(this, void 0, void 0, function () {
-                            var error_1;
-                            return __generator(this, function (_a) {
-                                switch (_a.label) {
-                                    case 0:
-                                        _a.trys.push([0, 2, , 3]);
-                                        return [4 /*yield*/, customerModel.create(req.body)];
-                                    case 1:
-                                        _a.sent();
-                                        return [3 /*break*/, 3];
-                                    case 2:
-                                        error_1 = _a.sent();
-                                        return [2 /*return*/, next(error_1)];
-                                    case 3:
-                                        res.send({ success: true });
-                                        return [2 /*return*/];
-                                }
-                            });
-                        });
+            app = express_1.default();
+            // //init db
+            // const connection = await mongodb.connect(`${process.env.MONGODB_URI}`, { useNewUrlParser:true, useUnifiedTopology: true })
+            // const db = connection.db(`${process.env.MONGODB_NAME}`)
+            // const customerModel = new Customer(db)
+            // init mongose db
+            mongoose_1.default.connect("" + process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+            customerModel = new mongoose_2.Customer();
+            app.use(body_parser_1.default.json());
+            app.post('/customer', function (req, res, next) {
+                return __awaiter(this, void 0, void 0, function () {
+                    var error_1;
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                _a.trys.push([0, 2, , 3]);
+                                return [4 /*yield*/, customerModel.create(req.body)];
+                            case 1:
+                                _a.sent();
+                                return [3 /*break*/, 3];
+                            case 2:
+                                error_1 = _a.sent();
+                                return [2 /*return*/, next(error_1)];
+                            case 3:
+                                res.send({ success: true });
+                                return [2 /*return*/];
+                        }
                     });
-                    app.get('/customer', function (req, res, next) {
-                        return __awaiter(this, void 0, void 0, function () {
-                            var customers, error_2;
-                            return __generator(this, function (_a) {
-                                switch (_a.label) {
-                                    case 0:
-                                        _a.trys.push([0, 2, , 3]);
-                                        return [4 /*yield*/, customerModel.getAll()];
-                                    case 1:
-                                        customers = _a.sent();
-                                        return [3 /*break*/, 3];
-                                    case 2:
-                                        error_2 = _a.sent();
-                                        return [2 /*return*/, next(error_2)];
-                                    case 3: return [2 /*return*/, res.send(customers)];
-                                }
-                            });
-                        });
+                });
+            });
+            app.get('/customer', function (req, res, next) {
+                return __awaiter(this, void 0, void 0, function () {
+                    var customers, error_2;
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                _a.trys.push([0, 2, , 3]);
+                                return [4 /*yield*/, customerModel.getAll()];
+                            case 1:
+                                customers = _a.sent();
+                                return [3 /*break*/, 3];
+                            case 2:
+                                error_2 = _a.sent();
+                                return [2 /*return*/, next(error_2)];
+                            case 3: return [2 /*return*/, res.send(customers)];
+                        }
                     });
-                    app.get('/cutomer/:id', function (req, res, next) {
-                        return __awaiter(this, void 0, void 0, function () {
-                            var customer, error_3;
-                            return __generator(this, function (_a) {
-                                switch (_a.label) {
-                                    case 0:
-                                        _a.trys.push([0, 2, , 3]);
-                                        return [4 /*yield*/, customerModel.getByID(req.params.id)];
-                                    case 1:
-                                        customer = _a.sent();
-                                        return [3 /*break*/, 3];
-                                    case 2:
-                                        error_3 = _a.sent();
-                                        return [2 /*return*/, next(error_3)];
-                                    case 3: return [2 /*return*/, res.send(customer)];
-                                }
-                            });
-                        });
+                });
+            });
+            app.get('/cutomer/:id', function (req, res, next) {
+                return __awaiter(this, void 0, void 0, function () {
+                    var customer, error_3;
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                _a.trys.push([0, 2, , 3]);
+                                return [4 /*yield*/, customerModel.getByID(req.params.id)];
+                            case 1:
+                                customer = _a.sent();
+                                return [3 /*break*/, 3];
+                            case 2:
+                                error_3 = _a.sent();
+                                return [2 /*return*/, next(error_3)];
+                            case 3: return [2 /*return*/, res.send(customer)];
+                        }
                     });
-                    app.put('/customer', function (req, res, next) {
-                        return __awaiter(this, void 0, void 0, function () {
-                            var error_4;
-                            return __generator(this, function (_a) {
-                                switch (_a.label) {
-                                    case 0:
-                                        _a.trys.push([0, 2, , 3]);
-                                        return [4 /*yield*/, customerModel.update(req.params.id, req.body)];
-                                    case 1:
-                                        _a.sent();
-                                        return [3 /*break*/, 3];
-                                    case 2:
-                                        error_4 = _a.sent();
-                                        return [2 /*return*/, next(error_4)];
-                                    case 3:
-                                        res.send({ success: true });
-                                        return [2 /*return*/];
-                                }
-                            });
-                        });
+                });
+            });
+            app.put('/customer', function (req, res, next) {
+                return __awaiter(this, void 0, void 0, function () {
+                    var error_4;
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                _a.trys.push([0, 2, , 3]);
+                                return [4 /*yield*/, customerModel.update(req.params.id, req.body)];
+                            case 1:
+                                _a.sent();
+                                return [3 /*break*/, 3];
+                            case 2:
+                                error_4 = _a.sent();
+                                return [2 /*return*/, next(error_4)];
+                            case 3:
+                                res.send({ success: true });
+                                return [2 /*return*/];
+                        }
                     });
-                    app.delete('/customer', function (req, res, next) {
-                        return __awaiter(this, void 0, void 0, function () {
-                            var error_5;
-                            return __generator(this, function (_a) {
-                                switch (_a.label) {
-                                    case 0:
-                                        _a.trys.push([0, 2, , 3]);
-                                        return [4 /*yield*/, customerModel.delete(req.params.id)];
-                                    case 1:
-                                        _a.sent();
-                                        return [3 /*break*/, 3];
-                                    case 2:
-                                        error_5 = _a.sent();
-                                        return [2 /*return*/, next(error_5)];
-                                    case 3:
-                                        res.send({ success: true });
-                                        return [2 /*return*/];
-                                }
-                            });
-                        });
+                });
+            });
+            app.delete('/customer', function (req, res, next) {
+                return __awaiter(this, void 0, void 0, function () {
+                    var error_5;
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                _a.trys.push([0, 2, , 3]);
+                                return [4 /*yield*/, customerModel.delete(req.params.id)];
+                            case 1:
+                                _a.sent();
+                                return [3 /*break*/, 3];
+                            case 2:
+                                error_5 = _a.sent();
+                                return [2 /*return*/, next(error_5)];
+                            case 3:
+                                res.send({ success: true });
+                                return [2 /*return*/];
+                        }
                     });
-                    app.use(function (err, req, res, next) {
-                        res.status(500).send({
-                            success: false,
-                            message: err.message
-                        });
-                    });
-                    app.listen(process.env.PORT || 8000, function () {
-                        console.log("App listen on port " + (process.env.PORT || 8000));
-                    });
-                    return [2 /*return*/];
-            }
+                });
+            });
+            app.use(function (err, req, res, next) {
+                res.status(500).send({
+                    success: false,
+                    message: err.message
+                });
+            });
+            app.listen(process.env.PORT || 8000, function () {
+                console.log("App listen on port " + (process.env.PORT || 8000));
+            });
+            return [2 /*return*/];
         });
     });
 }
 initApp();
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9zcmMvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxpREFBaUQ7QUFDakQsdUNBQW9DO0FBRXBDLGtEQUEyQjtBQUMzQixnQkFBTSxDQUFDLE1BQU0sRUFBRSxDQUFBO0FBRWYsb0RBQTZCO0FBQzdCLDREQUFvQztBQUVwQyxvREFBNkI7QUFDN0IscUNBQWdEO0FBRWhELFNBQWUsT0FBTzs7Ozs7O29CQUNkLEdBQUcsR0FBRyxpQkFBTyxFQUFFLENBQUE7b0JBR0YscUJBQU0saUJBQU8sQ0FBQyxPQUFPLENBQUMsS0FBRyxPQUFPLENBQUMsR0FBRyxDQUFDLFdBQWEsRUFBRSxFQUFFLGVBQWUsRUFBQyxJQUFJLEVBQUUsa0JBQWtCLEVBQUUsSUFBSSxFQUFFLENBQUMsRUFBQTs7b0JBQXBILFVBQVUsR0FBRyxTQUF1RztvQkFDcEgsRUFBRSxHQUFHLFVBQVUsQ0FBQyxFQUFFLENBQUMsS0FBRyxPQUFPLENBQUMsR0FBRyxDQUFDLFlBQWMsQ0FBQyxDQUFBO29CQUNqRCxhQUFhLEdBQUcsSUFBSSxrQkFBUSxDQUFDLEVBQUUsQ0FBQyxDQUFBO29CQUV0QyxHQUFHLENBQUMsR0FBRyxDQUFDLHFCQUFVLENBQUMsSUFBSSxFQUFFLENBQUMsQ0FBQTtvQkFFMUIsR0FBRyxDQUFDLElBQUksQ0FBQyxXQUFXLEVBQUUsVUFBZSxHQUFHLEVBQUUsR0FBRyxFQUFFLElBQUk7Ozs7Ozs7d0NBRS9DLHFCQUFNLGFBQWEsQ0FBQyxNQUFNLENBQUMsR0FBRyxDQUFDLElBQUksQ0FBQyxFQUFBOzt3Q0FBcEMsU0FBb0MsQ0FBQTs7Ozt3Q0FFcEMsc0JBQU8sSUFBSSxDQUFDLE9BQUssQ0FBQyxFQUFBOzt3Q0FHcEIsR0FBRyxDQUFDLElBQUksQ0FBQyxFQUFFLE9BQU8sRUFBRSxJQUFJLEVBQUUsQ0FBQyxDQUFBOzs7OztxQkFDNUIsQ0FBQyxDQUFBO29CQUVGLEdBQUcsQ0FBQyxHQUFHLENBQUMsV0FBVyxFQUFFLFVBQWUsR0FBRyxFQUFFLEdBQUcsRUFBRSxJQUFJOzs7Ozs7O3dDQUdsQyxxQkFBTSxhQUFhLENBQUMsTUFBTSxFQUFFLEVBQUE7O3dDQUF4QyxTQUFTLEdBQUcsU0FBNEIsQ0FBQTs7Ozt3Q0FFeEMsc0JBQU8sSUFBSSxDQUFDLE9BQUssQ0FBQyxFQUFBOzRDQUdwQixzQkFBTyxHQUFHLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxFQUFBOzs7O3FCQUMzQixDQUFDLENBQUE7b0JBRUYsR0FBRyxDQUFDLEdBQUcsQ0FBQyxjQUFjLEVBQUUsVUFBZSxHQUFHLEVBQUUsR0FBRyxFQUFFLElBQUk7Ozs7Ozs7d0NBR3RDLHFCQUFNLGFBQWEsQ0FBQyxPQUFPLENBQUMsR0FBRyxDQUFDLE1BQU0sQ0FBQyxFQUFFLENBQUMsRUFBQTs7d0NBQXJELFFBQVEsR0FBRyxTQUEwQyxDQUFBOzs7O3dDQUVyRCxzQkFBTyxJQUFJLENBQUMsT0FBSyxDQUFDLEVBQUE7NENBR3BCLHNCQUFPLEdBQUcsQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDLEVBQUE7Ozs7cUJBQzFCLENBQUMsQ0FBQTtvQkFFRixHQUFHLENBQUMsR0FBRyxDQUFDLFdBQVcsRUFBRSxVQUFlLEdBQUcsRUFBRSxHQUFHLEVBQUUsSUFBSTs7Ozs7Ozt3Q0FFOUMscUJBQU0sYUFBYSxDQUFDLE1BQU0sQ0FBQyxHQUFHLENBQUMsTUFBTSxDQUFDLEVBQUUsRUFBRSxHQUFHLENBQUMsSUFBSSxDQUFDLEVBQUE7O3dDQUFuRCxTQUFtRCxDQUFBOzs7O3dDQUVuRCxzQkFBTyxJQUFJLENBQUMsT0FBSyxDQUFDLEVBQUE7O3dDQUdwQixHQUFHLENBQUMsSUFBSSxDQUFDLEVBQUUsT0FBTyxFQUFFLElBQUksRUFBRSxDQUFDLENBQUE7Ozs7O3FCQUM1QixDQUFDLENBQUE7b0JBRUYsR0FBRyxDQUFDLE1BQU0sQ0FBQyxXQUFXLEVBQUUsVUFBZSxHQUFHLEVBQUUsR0FBRyxFQUFFLElBQUk7Ozs7Ozs7d0NBRWpELHFCQUFNLGFBQWEsQ0FBQyxNQUFNLENBQUMsR0FBRyxDQUFDLE1BQU0sQ0FBQyxFQUFFLENBQUMsRUFBQTs7d0NBQXpDLFNBQXlDLENBQUE7Ozs7d0NBRXpDLHNCQUFPLElBQUksQ0FBQyxPQUFLLENBQUMsRUFBQTs7d0NBR3BCLEdBQUcsQ0FBQyxJQUFJLENBQUMsRUFBQyxPQUFPLEVBQUUsSUFBSSxFQUFDLENBQUMsQ0FBQTs7Ozs7cUJBQzFCLENBQUMsQ0FBQTtvQkFFRixHQUFHLENBQUMsR0FBRyxDQUFDLFVBQVMsR0FBVSxFQUFFLEdBQW9CLEVBQUUsR0FBcUIsRUFBRSxJQUEwQjt3QkFDbEcsR0FBRyxDQUFDLE1BQU0sQ0FBQyxHQUFHLENBQUMsQ0FBQyxJQUFJLENBQUM7NEJBQ25CLE9BQU8sRUFBRSxLQUFLOzRCQUNkLE9BQU8sRUFBRSxHQUFHLENBQUMsT0FBTzt5QkFDckIsQ0FBQyxDQUFBO29CQUNKLENBQUMsQ0FBQyxDQUFBO29CQUVGLEdBQUcsQ0FBQyxNQUFNLENBQUMsT0FBTyxDQUFDLEdBQUcsQ0FBQyxJQUFJLElBQUksSUFBSSxFQUFFO3dCQUNuQyxPQUFPLENBQUMsR0FBRyxDQUFDLHlCQUF1QixPQUFPLENBQUMsR0FBRyxDQUFDLElBQUksSUFBSSxJQUFJLENBQUcsQ0FBQyxDQUFBO29CQUNqRSxDQUFDLENBQUMsQ0FBQTs7Ozs7Q0FDSDtBQUVELE9BQU8sRUFBRSxDQUFBIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9zcmMvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxpREFBaUQ7QUFDakQsdUNBQW9DO0FBRXBDLGtEQUEyQjtBQUMzQixnQkFBTSxDQUFDLE1BQU0sRUFBRSxDQUFBO0FBRWYsb0RBQTZCO0FBQzdCLDREQUFvQztBQUVwQyxnQ0FBZ0M7QUFDaEMsc0RBQStCO0FBQy9CLG1EQUFtRDtBQUNuRCx1Q0FBaUQ7QUFFakQsU0FBZSxPQUFPOzs7O1lBQ2QsR0FBRyxHQUFHLGlCQUFPLEVBQUUsQ0FBQTtZQUVyQixZQUFZO1lBQ1osNkhBQTZIO1lBQzdILDBEQUEwRDtZQUMxRCx5Q0FBeUM7WUFFekMsa0JBQWtCO1lBQ2xCLGtCQUFRLENBQUMsT0FBTyxDQUFDLEtBQUcsT0FBTyxDQUFDLEdBQUcsQ0FBQyxXQUFhLEVBQUUsRUFBRSxlQUFlLEVBQUMsSUFBSSxFQUFFLGtCQUFrQixFQUFFLElBQUksRUFBRSxDQUFDLENBQUE7WUFDNUYsYUFBYSxHQUFHLElBQUksbUJBQVEsRUFBRSxDQUFBO1lBRXBDLEdBQUcsQ0FBQyxHQUFHLENBQUMscUJBQVUsQ0FBQyxJQUFJLEVBQUUsQ0FBQyxDQUFBO1lBRTFCLEdBQUcsQ0FBQyxJQUFJLENBQUMsV0FBVyxFQUFFLFVBQWUsR0FBRyxFQUFFLEdBQUcsRUFBRSxJQUFJOzs7Ozs7O2dDQUUvQyxxQkFBTSxhQUFhLENBQUMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxJQUFJLENBQUMsRUFBQTs7Z0NBQXBDLFNBQW9DLENBQUE7Ozs7Z0NBRXBDLHNCQUFPLElBQUksQ0FBQyxPQUFLLENBQUMsRUFBQTs7Z0NBR3BCLEdBQUcsQ0FBQyxJQUFJLENBQUMsRUFBRSxPQUFPLEVBQUUsSUFBSSxFQUFFLENBQUMsQ0FBQTs7Ozs7YUFDNUIsQ0FBQyxDQUFBO1lBRUYsR0FBRyxDQUFD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
