@@ -1,5 +1,6 @@
 import mongodb from 'mongodb'
 
+
 export type CustomerType = {
   first_name: string
 	last_name: string
@@ -51,12 +52,20 @@ export class Customer {
     return customer
   }
 
-  async update() {
-
+  async update(customerID: string, updateData: Partial<CustomerType>) {
+    try {
+      await this.collection.updateOne({ _id: new mongodb.ObjectID(customerID) }, { $set: updateData }) // set agar data lain tidak hilang
+    }catch(error){
+      throw error
+    }
   }
 
 
-  async delete() {
-
+  async delete(customerID: string) {
+    try{
+      await this.collection.deleteOne({ _id: new mongodb.ObjectID(customerID) })
+    }catch(error){
+      throw error
+    }
   }
 }

@@ -52,12 +52,24 @@ async function initApp() {
     return res.send(customer)
   })
 
-  app.put('/customer', function(req, res, next) {
+  app.put('/customer', async function(req, res, next) {
+    try {
+      await customerModel.update(req.params.id, req.body)
+    }catch(error){
+      return next(error)
+    }
 
+    res.send({ success: true })
   })
 
-  app.delete('/customer', function(req, res, next) {
+  app.delete('/customer', async function(req, res, next) {
+    try {
+      await customerModel.delete(req.params.id)
+    }catch(error){
+      return next(error)
+    }
 
+    res.send({success: true})
   })
 
   app.use(function(err: Error, req: express.Request, res: express.Response, next: express.NextFunction) {

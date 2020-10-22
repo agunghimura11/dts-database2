@@ -42,7 +42,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Customer = void 0;
 var mongoose_1 = __importDefault(require("mongoose"));
 //schema definition
-var CustomerSchema = new mongoose_1.default.Schema({});
+var CustomerSchema = new mongoose_1.default.Schema({
+    first_name: String,
+    last_name: String,
+    age: Number,
+    customer_type: String,
+    street: String,
+    city: String,
+    state: String,
+    zip_code: String,
+    phone_number: String,
+});
 var Customer = /** @class */ (function () {
     function Customer() {
         this.model = mongoose_1.default.model('customer', CustomerSchema);
@@ -85,4 +95,4 @@ var Customer = /** @class */ (function () {
     return Customer;
 }());
 exports.Customer = Customer;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9uZ29vc2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9zcmMvbW9uZ29vc2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsc0RBQStCO0FBZ0IvQixtQkFBbUI7QUFDbkIsSUFBTSxjQUFjLEdBQUcsSUFBSSxrQkFBUSxDQUFDLE1BQU0sQ0FBQyxFQUUxQyxDQUFDLENBQUE7QUFFRjtJQUdFO1FBQ0UsSUFBSSxDQUFDLEtBQUssR0FBRyxrQkFBUSxDQUFDLEtBQUssQ0FBQyxVQUFVLEVBQUUsY0FBYyxDQUFDLENBQUE7SUFDekQsQ0FBQztJQUVLLHlCQUFNLEdBQVo7Ozs7OztLQUVDO0lBRUsseUJBQU0sR0FBWjs7Ozs7O0tBRUM7SUFFSywwQkFBTyxHQUFiOzs7Ozs7S0FFQztJQUVLLHlCQUFNLEdBQVo7Ozs7OztLQUVDO0lBRUsseUJBQU0sR0FBWjs7Ozs7O0tBRUM7SUFDSCxlQUFDO0FBQUQsQ0FBQyxBQTFCRCxJQTBCQztBQTFCWSw0QkFBUSJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9uZ29vc2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9zcmMvbW9uZ29vc2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsc0RBQStCO0FBZ0IvQixtQkFBbUI7QUFDbkIsSUFBTSxjQUFjLEdBQUcsSUFBSSxrQkFBUSxDQUFDLE1BQU0sQ0FBQztJQUN6QyxVQUFVLEVBQUUsTUFBTTtJQUNuQixTQUFTLEVBQUUsTUFBTTtJQUNqQixHQUFHLEVBQUUsTUFBTTtJQUNYLGFBQWEsRUFBRSxNQUFNO0lBQ3JCLE1BQU0sRUFBRSxNQUFNO0lBQ2QsSUFBSSxFQUFFLE1BQU07SUFDWixLQUFLLEVBQUUsTUFBTTtJQUNiLFFBQVEsRUFBRSxNQUFNO0lBQ2hCLFlBQVksRUFBRSxNQUFNO0NBQ3BCLENBQUMsQ0FBQTtBQUVGO0lBR0U7UUFDRSxJQUFJLENBQUMsS0FBSyxHQUFHLGtCQUFRLENBQUMsS0FBSyxDQUFDLFVBQVUsRUFBRSxjQUFjLENBQUMsQ0FBQTtJQUN6RCxDQUFDO0lBRUsseUJBQU0sR0FBWjs7Ozs7O0tBRUM7SUFFSyx5QkFBTSxHQUFaOzs7Ozs7S0FFQztJQUVLLDBCQUFPLEdBQWI7Ozs7OztLQUVDO0lBRUsseUJBQU0sR0FBWjs7Ozs7O0tBRUM7SUFFSyx5QkFBTSxHQUFaOzs7Ozs7S0FFQztJQUNILGVBQUM7QUFBRCxDQUFDLEFBMUJELElBMEJDO0FBMUJZLDRCQUFRIn0=

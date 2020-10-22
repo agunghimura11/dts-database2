@@ -103,21 +103,45 @@ var Customer = /** @class */ (function () {
             });
         });
     };
-    Customer.prototype.update = function () {
+    Customer.prototype.update = function (customerID, updateData) {
         return __awaiter(this, void 0, void 0, function () {
+            var error_4;
             return __generator(this, function (_a) {
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.collection.updateOne({ _id: new mongodb_1.default.ObjectID(customerID) }, { $set: updateData })]; // set agar data lain tidak hilang
+                    case 1:
+                        _a.sent(); // set agar data lain tidak hilang
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_4 = _a.sent();
+                        throw error_4;
+                    case 3: return [2 /*return*/];
+                }
             });
         });
     };
-    Customer.prototype.delete = function () {
+    Customer.prototype.delete = function (customerID) {
         return __awaiter(this, void 0, void 0, function () {
+            var error_5;
             return __generator(this, function (_a) {
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.collection.deleteOne({ _id: new mongodb_1.default.ObjectID(customerID) })];
+                    case 1:
+                        _a.sent();
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_5 = _a.sent();
+                        throw error_5;
+                    case 3: return [2 /*return*/];
+                }
             });
         });
     };
     return Customer;
 }());
 exports.Customer = Customer;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9uZ29kYi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uL3NyYy9tb25nb2RiLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUFBLG9EQUE2QjtBQWU3QjtJQUdFLGtCQUFZLEVBQWM7UUFDeEIsSUFBSSxDQUFDLFVBQVUsR0FBRyxFQUFFLENBQUMsVUFBVSxDQUFDLFVBQVUsQ0FBQyxDQUFBO0lBQzdDLENBQUM7SUFFSyx5QkFBTSxHQUFaLFVBQWEsSUFBa0I7Ozs7Ozs7d0JBRVoscUJBQU0sSUFBSSxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLEVBQUE7O3dCQUE5QyxNQUFNLEdBQUcsU0FBcUM7d0JBQ3BELE9BQU8sQ0FBQyxHQUFHLENBQUMsa0JBQWtCLEVBQUUsTUFBTSxDQUFDLENBQUE7Ozs7d0JBRXZDLE1BQU0sT0FBSyxDQUFBOzs7OztLQUVkO0lBRUsseUJBQU0sR0FBWjs7Ozs7Ozt3QkFHZ0IscUJBQU0sSUFBSSxDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUMsRUFBRSxDQUFDLENBQUMsT0FBTyxFQUFFLEVBQUE7O3dCQUFwRCxTQUFTLEdBQUcsU0FBd0MsQ0FBQTs7Ozt3QkFFcEQsTUFBTSxPQUFLLENBQUE7NEJBR2Isc0JBQU8sU0FBUyxFQUFBOzs7O0tBQ2pCO0lBRUssMEJBQU8sR0FBYixVQUFjLFVBQWtCOzs7Ozs7O3dCQUdqQixxQkFBTSxJQUFJLENBQUMsVUFBVSxDQUFDLE9BQU8sQ0FBQyxFQUFFLEdBQUcsRUFBRSxJQUFJLGlCQUFPLENBQUMsUUFBUSxDQUFDLFVBQVUsQ0FBQyxFQUFFLENBQUMsRUFBQTs7d0JBQW5GLFFBQVEsR0FBRyxTQUF3RSxDQUFBOzs7O3dCQUVuRixNQUFNLE9BQUssQ0FBQTs0QkFHYixzQkFBTyxRQUFRLEVBQUE7Ozs7S0FDaEI7SUFFSyx5QkFBTSxHQUFaOzs7Ozs7S0FFQztJQUdLLHlCQUFNLEdBQVo7Ozs7OztLQUVDO0lBQ0gsZUFBQztBQUFELENBQUMsQUE5Q0QsSUE4Q0M7QUE5Q1ksNEJBQVEifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9uZ29kYi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uL3NyYy9tb25nb2RiLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUFBLG9EQUE2QjtBQWdCN0I7SUFHRSxrQkFBWSxFQUFjO1FBQ3hCLElBQUksQ0FBQyxVQUFVLEdBQUcsRUFBRSxDQUFDLFVBQVUsQ0FBQyxVQUFVLENBQUMsQ0FBQTtJQUM3QyxDQUFDO0lBRUsseUJBQU0sR0FBWixVQUFhLElBQWtCOzs7Ozs7O3dCQUVaLHFCQUFNLElBQUksQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxFQUFBOzt3QkFBOUMsTUFBTSxHQUFHLFNBQXFDO3dCQUNwRCxPQUFPLENBQUMsR0FBRyxDQUFDLGtCQUFrQixFQUFFLE1BQU0sQ0FBQyxDQUFBOzs7O3dCQUV2QyxNQUFNLE9BQUssQ0FBQTs7Ozs7S0FFZDtJQUVLLHlCQUFNLEdBQVo7Ozs7Ozs7d0JBR2dCLHFCQUFNLElBQUksQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDLEVBQUUsQ0FBQyxDQUFDLE9BQU8sRUFBRSxFQUFBOzt3QkFBcEQsU0FBUyxHQUFHLFNBQXdDLENBQUE7Ozs7d0JBRXBELE1BQU0sT0FBSyxDQUFBOzRCQUdiLHNCQUFPLFNBQVMsRUFBQTs7OztLQUNqQjtJQUVLLDBCQUFPLEdBQWIsVUFBYyxVQUFrQjs7Ozs7Ozt3QkFHakIscUJBQU0sSUFBSSxDQUFDLFVBQVUsQ0FBQyxPQUFPLENBQUMsRUFBRSxHQUFHLEVBQUUsSUFBSSxpQkFBTyxDQUFDLFFBQVEsQ0FBQyxVQUFVLENBQUMsRUFBRSxDQUFDLEVBQUE7O3dCQUFuRixRQUFRLEdBQUcsU0FBd0UsQ0FBQTs7Ozt3QkFFbkYsTUFBTSxPQUFLLENBQUE7NEJBR2Isc0JBQU8sUUFBUSxFQUFBOzs7O0tBQ2hCO0lBRUsseUJBQU0sR0FBWixVQUFhLFVBQWtCLEVBQUUsVUFBaUM7Ozs7Ozs7d0JBRTlELHFCQUFNLElBQUksQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLEVBQUUsR0FBRyxFQUFFLElBQUksaUJBQU8sQ0FBQyxRQUFRLENBQUMsVUFBVSxDQUFDLEVBQUUsRUFBRSxFQUFFLElBQUksRUFBRSxVQUFVLEVBQUUsQ0FBQyxFQUFBLENBQUMsa0NBQWtDOzt3QkFBbkksU0FBZ0csQ0FBQSxDQUFDLGtDQUFrQzs7Ozt3QkFFbkksTUFBTSxPQUFLLENBQUE7Ozs7O0tBRWQ7SUFHSyx5QkFBTSxHQUFaLFVBQWEsVUFBa0I7Ozs7Ozs7d0JBRTNCLHFCQUFNLElBQUksQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLEVBQUUsR0FBRyxFQUFFLElBQUksaUJBQU8sQ0FBQyxRQUFRLENBQUMsVUFBVSxDQUFDLEVBQUUsQ0FBQyxFQUFBOzt3QkFBMUUsU0FBMEUsQ0FBQTs7Ozt3QkFFMUUsTUFBTSxPQUFLLENBQUE7Ozs7O0tBRWQ7SUFDSCxlQUFDO0FBQUQsQ0FBQyxBQXRERCxJQXNEQztBQXREWSw0QkFBUSJ9
